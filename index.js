@@ -63,6 +63,11 @@ app.get('/getdatafromredis', (req, res) => {
     
 });
 
+app.get('/', (req, res) => {
+    res.send('Hello Universe!');
+    
+});
+
 app.get('/setdatainredis', (req, res) => {
     var query = req.query;
     var key = query.key;
