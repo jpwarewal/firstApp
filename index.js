@@ -47,7 +47,7 @@ client.on('error', (err) => {
 const app = express();
 
 // Set the port for the server
-const PORT = 3001;
+const PORT = 3000;
 
 // Create a route for the root URL
 app.get('/getdatafromredis', (req, res) => {
