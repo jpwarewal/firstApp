@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
         value: 'Hello Universe!',
         res: res
     }
-    res.send(output);
+    res.send(output.value);
     
 });
 
@@ -86,16 +86,20 @@ app.get('/setdatainredis', (req, res) => {
     var query = req.query;
     var key = query.key;
     var value = query.value;
-    console.log(query);
-    client.set(key, value)
-    .then(function(res, err){
+    var hashmap = query.hashmap;
+    console.log(hashmap);
+    hashmap = JSON.parse(hashmap);
+    console.log(hashmap);
+
+    client.HSET(key, hashmap)
+    .then(function(res, err) {
         console.log(res);
+        res.send('Set the key in cache');
     })
-    var output = {
-        value: 'Hello World!',
-        res: res
-    }
-    res.send(output);
+    .catch(function(err) {
+        console.log(err);
+        res.send(err);
+    })
 });
 
 // Start the server
