@@ -62,11 +62,11 @@ app.get('/getdatafromredis', (req, res) => {
     var key = query.key;
     var value = query.value;
     console.log(query);
-    client.get(key)
+    client.HGETALL(key)
     .then(function(output) {
         var output = {
             value: 'Hello World!',
-            res: output
+            output: output
         }
         res.send(output);
     })
