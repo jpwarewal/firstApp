@@ -64,14 +64,21 @@ app.get('/getdatafromredis', (req, res) => {
     console.log(query);
     client.get(key)
     .then(function(output) {
-        console.log(output);
-        res.send('Hello World!' + output);
+        var output = {
+            value: 'Hello World!',
+            res: output
+        }
+        res.send(output);
     })
     
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello Universe!');
+    var output = {
+        value: 'Hello Universe!',
+        res: res
+    }
+    res.send(output);
     
 });
 
@@ -84,7 +91,11 @@ app.get('/setdatainredis', (req, res) => {
     .then(function(res, err){
         console.log(res);
     })
-    res.send('Hello World!');
+    var output = {
+        value: 'Hello World!',
+        res: res
+    }
+    res.send(output);
 });
 
 // Start the server
