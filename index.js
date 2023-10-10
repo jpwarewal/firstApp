@@ -46,8 +46,15 @@ client.on('error', (err) => {
 
 const app = express();
 
-// Set the port for the server
 const PORT = 3000;
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+// Set the port for the server
+
 
 // Create a route for the root URL
 app.get('/getdatafromredis', (req, res) => {
