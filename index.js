@@ -64,7 +64,7 @@ app.get('/getdatafromredis', (req, res) => {
     console.log(query);
     client.HGETALL(key)
     .then(function(output) {
-        var output = {
+        var result = {
             value: 'Hello World!',
             output: output
         }
@@ -91,9 +91,9 @@ app.get('/setdatainredis', (req, res) => {
     hashmap = JSON.parse(hashmap);
     console.log(hashmap);
 
-    client.HSET(key, hashmap)
-    .then(function(res, err) {
-        console.log(res);
+    client.HSET(key, hashmap.hkey, JSON.stringify(hashmap.hvalue))
+    .then(function(response, err) {
+        console.log(response);
         res.send('Set the key in cache');
     })
     .catch(function(err) {
