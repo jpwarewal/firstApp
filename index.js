@@ -94,7 +94,7 @@ app.get('/setdatainredis', (req, res) => {
     client.HSET(key, hashmap.hkey, JSON.stringify(hashmap.hvalue))
     .then(function(response, err) {
         console.log(response);
-        res.send('Set the key in cache');
+        res.send(response);
     })
     .catch(function(err) {
         console.log(err);
