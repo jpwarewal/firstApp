@@ -94,11 +94,6 @@ app.get('/setdatainredis', (req, res) => {
 app.get('/cleardatafromredis', (req, res) => {
     var query = req.query;
     var key = query.key;
-    var value = query.value;
-    var hashmap = query.hashmap;
-    console.log(hashmap);
-    hashmap = JSON.parse(hashmap);
-    console.log(hashmap);
 
     client.del(query.key, (err, reply) => {
         if (err) {
