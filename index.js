@@ -14,24 +14,13 @@ client.on('ready', () => {
     // Once the connection is successful, you can start using Redis commands
     // For example, to set a value in Redis:
     // Set a value in Redis with a callback function
-    client.set('my-key', 'my-value', (err, reply) => {
+    client.del('abc', (err, reply) => {
         if (err) {
             console.error(err);
             return;
         }
 
         // The value was set successfully
-        console.log(reply);
-    });
-
-    // To get a value from Redis:
-    client.get('my-key', (err, reply) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        // The value is in the `reply` variable
         console.log(reply);
     });
 });
@@ -100,6 +89,27 @@ app.get('/setdatainredis', (req, res) => {
         console.log(err);
         res.send(err);
     })
+});
+
+app.get('/cleardatafromredis', (req, res) => {
+    var query = req.query;
+    var key = query.key;
+    var value = query.value;
+    var hashmap = query.hashmap;
+    console.log(hashmap);
+    hashmap = JSON.parse(hashmap);
+    console.log(hashmap);
+
+    client.del(query.key, (err, reply) => {
+        if (err) {
+            
+        res.send(err);
+        }
+
+        // The value was set successfully
+        
+        res.send(reply);
+    });
 });
 
 // Start the server
