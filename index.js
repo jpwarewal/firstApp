@@ -100,10 +100,14 @@ app.get('/cleardatafromredis', (req, res) => {
             
         res.send(err);
         }
-
-        // The value was set successfully
+        else {
+            // The value deleted successfully
+            var output = {
+                response: "value deleted successfully"
+            }
+            res.send(output);
+        }
         
-        res.send(reply);
     });
 });
 
