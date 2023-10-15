@@ -111,6 +111,27 @@ app.get('/cleardatafromredis', (req, res) => {
     });
 });
 
+app.get('/removedatafromredis', (req, res) => {
+    var query = req.query;
+    var key = query.key;
+    var hkey = query.hkey;
+
+    client.HDEL(key, hkey, (err, reply) => {
+        if (err) {
+            
+        res.send(err);
+        }
+        else {
+            // The value deleted successfully
+            var output = {
+                response: "value deleted successfully"
+            }
+            res.send(output);
+        }
+        
+    });
+});
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server running at: http://localhost:${PORT}/`);
